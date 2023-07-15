@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!--告诉浏览器用哪种内核渲染页面-->
+    <meta name="renderer" content="webkit">
+    <!--用chrome内核来渲染-->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <title>课程详情</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+</head>
+
+<body>
+    <section class="headerwrap ">
+        <header>
+            <div class=" header">
+                <div class="middle">
+                    <div class="wp">
+                        <a href="/"><img class="fl" src="/static/images/logo.jpg" /></a>
+                        <div class="searchbox fr">
+                            <div class="fl">
+                                <ul>
+                                    <li><a href="#">开课/合作</a></li>
+                                    <li><a href="#">下载</a></li>
+                                    <li><a href="#">私信</a></li>
+                                    <li><a href="#">登录</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </header>
+    </section>
+    <!--crumbs start-->
+
+    <section>
+        <div class="wp">
+            <div class="crumbs">
+                <ul>
+                    <li><a href="/index/">首页</a>></li>
+                    <li>课程详情</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+
+    <section>
+        <div class="wp">
+            <div class="groupPurchase_detail detail">
+                <div class="toppro">
+                    <div class="left">
+                        <div class="picbox">
+                            <div class="tb-booth tb-pic">
+                                <img width="440" height="445" src="/{{course.image}}" class="jqzoom" />
+                            </div>
+
+                        </div>
+                        <div class="des">
+                            <h1 title="{{ course.name }}">{{ course.name }}</h1>
+                            <span class="key">{{ course.desc }}</span>
+                            <div class="prize">
+                                <span class="fl">难度：<i class="key">{{ course.get_degree_display }}</i></span>
+                                <span class="fr">学习人数：{{ course.students }}</span>
+                            </div>
+                            <ul class="parameter">
+                                <li><span class="pram word3">时&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;长：</span><span>{{ course.learn_times }}</span></li>
+                                <li><span class="pram word3">章&nbsp;节&nbsp;数：</span><span>{{ course.get_zj_nums }}</span></li>
+                                <li><span class="pram word3">课程类别：</span><span title="">{{ course.category }}</span></li>
+
+                            </ul>
+                            <div class="btns">
+
+                                <div class="buy btn"><a style="color: white" href="{% url 'courses:course_info' course.id %}">开始学习</a></div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="right">
+                        <div class="head">
+                            <h1>授课机构</h1>
+                            <p>世界名校，课程权威</p>
+                        </div>
+                        <div class="pic">
+                            <a href="{% url 'org:org_desc' course.course_org.id %}">
+                                <img width="150" height="80" src="/{{course.course_org.image}}" />
+                            </a>
+                        </div>
+                        <a href="{% url 'org:org_desc' course.course_org.id %}">
+                            <h2 class="center" title="{{ course.course_org.name }}">{{ course.course_org.name }}</h2>
+                        </a>
+
+                        <div class="clear">
+                            <ul>
+                                <li>
+                                    <span>&nbsp;</span>
+                                </li>
+                                <li>
+                                    <span>&nbsp;</span>
+                                </li>
+                                <li>所在地区：&nbsp;&nbsp;{{ course.course_org.address }}</li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="wp">
+            <div class="list groupPurchase_detail_pro">
+                <div class="left layout">
+                    <div class="head">
+                        <ul class="tab_header">
+                            <li class="active">课程详情</li>
+                        </ul>
+                    </div>
+                    <div class="tab_cont tab_cont1">
+
+                        {% autoescape off %} {{ course.detail }} {% endautoescape %}
+                    </div>
+                    <div class="tab_cont tab_cont2">
+                        <div class="comment">
+                            <div class="comenlist">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="right layout">
+                    <div class="head">相关课程推荐</div>
+                    <div class="group_recommend">
+                        {% for relate_course in relate_coures %}
+                        <dl>
+                            <dt>
+                                <a href="{% url 'courses:course_detail' relate_course.id %}">
+                                    <img width="240" height="220" class="scrollLoading" src="/{{relate_course.image}}" />
+                                </a>
+                            </dt>
+                            <dd>
+                                <a href="{% url 'courses:course_detail' relate_course.id %}">
+                                    <h2> {{ relate_course.name }}</h2>
+                                </a>
+                                <span class="fl">学习时长：<i class="key">{{ relate_course.learn_times }}</i></span>
+                            </dd>
+                        </dl>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer">
+            <div class="wp">
+                <section class="wrap-bg-dark-gray">
+                    <div class="wrap-cooperation">
+                        <h3 class="cooperation-title">合作链接</h3>
+                        <ul class="cooperation-list" id="js-cooperation-list">
+                            <li> <a class="link-cooperation" href="https://www.hbsi.edu.cn/" title="河北软件职业技术学院" target="_blank" report-tdw="action=cooperation_click&amp;ver3=1">河北软件职业技术学院</a></li>                         <!--<li> <a class="link-cooperation" href="https://fm.qq.com/" title="企鹅FM" target="_blank" report-tdw="action=cooperation_click&amp;ver3=7">企鹅FM</a></li>-->
+                             </ul>
+                    </div>
+                </section>
+
+            </div>
+            <p class="line"></p>
+            <div class="wp clear">
+                <span class="fl">在线教育平台 保留所有权利</span>
+                <span class="fr">Copyright © 2023 hbsi. All Rights Reserved.</span>
+            </div>
+        </div>
+    </footer>
+
+
+</body>
+
+</html>

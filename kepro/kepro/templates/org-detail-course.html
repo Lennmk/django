@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+     <!--告诉浏览器用哪种内核渲染页面-->
+    <meta name="renderer" content="webkit">
+    <!--用chrome内核来渲染-->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <title>机构课程列表页</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/reset.css" >
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css" >
+</head>
+<body>
+  <section class="headerwrap ">
+        <header>
+            <div class=" header">
+                <div class="middle">
+                    <div class="wp">
+                        <a href="/"><img class="fl" src="/static/images/logo.jpg" /></a>
+                        <div class="searchbox fr">
+                            <div class="fl">
+                                <ul>
+                                    <!-- <li><a href="#">开课/合作</a></li>
+                                    <li><a href="#">下载</a></li>
+                                    <li><a href="#">私信</a></li>
+                                    <li><a href="#">登录</a></li> -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </header>
+  </section>
+  <section>
+        <div class="wp">
+            <ul class="crumbs">
+                <li><a href="/index/">首页</a>></li>
+                <li><a href="{% url 'org:org_desc' course_org.id %}">课程机构</a>></li>
+                <li>机构课程</li>
+            </ul>
+        </div>
+    </section>
+  <section>
+        <div class="wp list personal_list comp">
+            <div class="left">
+                <ul>
+                    <li class=""><a href="{% url 'org:org_desc' course_org.id %}">机构介绍</a></li>
+                    <li class="active2"><a href="{% url 'org:org_course' course_org.id %}">机构课程</a></li>
+                    <li class=""><a href="{% url 'org:org_teacher' course_org.id %}">机构讲师</a></li>
+                </ul>
+            </div>
+
+            <div class="right companycenter layout">
+                <div class="head">
+                    <h1>机构课程</h1>
+                </div>
+                <div class="brief group_list">
+                    {% for course in all_courses %}
+                    <div class="module1_5 box">
+                        <a class="comp-img-box" href="{% url 'courses:course_detail' course.id %}">
+
+                            <img width="214" height="195" src="/{{ course.image }}" />
+                        </a>
+                        <div class="des">
+                            <a href="{% url 'courses:course_detail' course.id %}">
+                                <h2>{{ course.name }}</h2>
+                            </a>
+                            <span class="fl">课时：<i class="key">{{ course.learn_times }}</i></span>
+                            <span class="fr">学习人数：{{ course.students }}</span>
+                        </div>
+                        <div class="bottom">
+                            <span class="fl">{{ course.course_org.name }}</span>
+                            <span class="star fr  notlogin
+                                    " data-favid="13" data-fav-type="4">
+                                {{ course.click_nums }}
+                            </span>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+  </section>
+    <footer>
+        <div class="footer">
+            <div class="wp">
+                <section class="wrap-bg-dark-gray">
+                    <div class="wrap-cooperation">
+                        <h3 class="cooperation-title">合作链接</h3>
+                        <ul class="cooperation-list" id="js-cooperation-list">
+                            <li><a class="link-cooperation" href="https://www.hbsi.edu.cn/" title="河北软件职业技术学院" target="_blank" report-tdw="action=cooperation_click&amp;ver3=1">河北软件职业技术学院</a></li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+            <p class="line"></p>
+            <div class="wp clear">
+                <span class="fl">在线教育平台 保留所有权利</span>
+                <span class="fr">Copyright ⏱ 2023 hbsi. All Rights Reserved.</span>
+            </div>
+        </div>
+    </footer>
+
+
+</body>
+</html>

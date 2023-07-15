@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户登录</title>
+</head>
+<body>
+<div style="float: contour">
+<form action="/courses/login/?next={{ next }}" method="post">
+    {% csrf_token %}
+    用户名： <input type="text" name="username"> <br>
+    密码： <input type="password" name="password">
+    <button type="submit">登录</button>
+    <br>
+    {{ msg }}
+</form>
+    </div>
+</body>
+</html>

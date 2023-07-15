@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <title>课程章节</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/course/learn-less.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/base.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/course/common-less.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+</head>
+
+<body>
+    <section class="headerwrap ">
+        <header>
+            <div class=" header">
+                <div class="middle">
+                    <div class="wp">
+                        <a href="/"><img class="fl" src="/static/images/logo.jpg" /></a>
+                        <div class="searchbox fr">
+                            <div class="fl">
+                                <ul>
+                                    <!-- <li><a href="#">开课/合作</a></li>
+                                    <li><a href="#">下载</a></li>
+                                    <li><a href="#">私信</a></li>
+                                    <li><a href="#">登录</a></li> -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </header>
+    </section>
+    <!--crumbs start-->
+
+    <section>
+        <div class="wp">
+            <div class="crumbs">
+                <ul>
+                    <li><a href="/index/">首页</a>></li>
+                    <li>章节信息</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+
+    <div id="main">
+        <div class="course-infos">
+            <div class="w pr">
+                <div style="height: 15px" class="path">
+                </div>
+                <div class="hd">
+                    <h2 class="l">{{ course.name }}</h2>
+                </div>
+                <div class="statics clearfix">
+                    <div class="static-item ">
+                        <span class="meta-value"><strong>{{ course.get_degree_display }}</strong></span>
+                        <span class="meta">难度</span>
+                        <em></em>
+                    </div>
+                    <div class="static-item static-time">
+                        <span class="meta-value">{{ course.learn_times }}分钟</span>
+                        <span class="meta">时长</span>
+                        <em></em>
+                    </div>
+                    <div class="static-item">
+                        <span class="meta-value"><strong>{{ course.students }}</strong></span>
+                        <span class="meta">学习人数</span>
+                        <em></em>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="course-info-main clearfix w has-progress">
+
+            <div class="info-bar clearfix">
+                <div class="content-wrap clearfix">
+                    <div class="content">
+                        <div class="mod-tab-menu">
+                            <ul class="course-menu clearfix">
+                                <!--<li><a class="ui-tabs-active active" id="learnOn" href="course-video.html"><span>章节</span></a></li>-->
+                                <li><a class="ui-tabs-active active" id="learnOn" href="#"><span>章节</span></a></li>
+                            </ul>
+                        </div>
+
+                        <div class="mod-chapters">
+                            {% for lesson in course.get_course_lesson %}
+                            <div class="chapter chapter-active">
+                                <h3>
+                                    <strong><i class="state-expand"></i>{{lesson.name}}</strong>
+                                </h3>
+                                <ul class="video">
+
+                                    {% for video in lesson.get_lesson_video %}
+                                    <li>
+                                        <a target="_blank" href='{{video.url }}' class="J-media-item studyvideo">{{video.name }} ({{ video.learn_times }}分钟)
+                                            <i class="study-state"></i>
+                                        </a>
+                                    </li>
+                                    {% endfor %}
+
+                                </ul>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+                    <div class="aside r">
+                        <div class="bd">
+
+                            <div class="box mb40">
+                                <h4>讲师提示</h4>
+                                <div class="teacher-info">
+                                    <a href="#">
+                                        <img src='/{{ course.teacher.image}}' width='80' height='80' />
+                                    </a>
+                                    <span class="tit">
+                                        <a href="#">{{ course.teacher.name}}</a>
+                                    </span>
+                                    <span class="job">{{ course.teacher.work_position }}</span>
+                                </div>
+                                <div class="course-info-tip">
+                                    <dl class="first">
+                                        <dt>课程须知</dt>
+                                        <dd class="autowrap">{{ course.youneed_know }}</dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>老师告诉你能学到什么？</dt>
+                                        <dd class="autowrap">{{ course.teacher_tell }}</dd>
+                                    </dl>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer">
+            <div class="wp">
+                <section class="wrap-bg-dark-gray">
+                    <div class="wrap-cooperation">
+                        <h3 class="cooperation-title">合作链接</h3>
+                       <ul class="cooperation-list" id="js-cooperation-list">
+                             <li> <a class="link-cooperation" href="https://www.hbsi.edu.cn/" title="河北软件职业技术学院" target="_blank" report-tdw="action=cooperation_click&amp;ver3=1">河北软件职业技术学院</a></li>
+                        </ul>
+                    </div>
+                </section>
+
+            </div>
+            <p class="line"></p>
+            <div class="wp clear">
+                <span class="fl">在线教育平台 保留所有权利</span>
+                <span class="fr">Copyright © 2023 hbsi. All Rights Reserved.</span>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
